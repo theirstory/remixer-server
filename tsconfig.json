@@ -1,0 +1,27 @@
+{
+	"compilerOptions": {
+		"lib": [
+			"dom",
+			"es2017"
+		],
+		"moduleResolution": "node",
+		"module": "commonjs",
+		"target": "es2017",
+		"noUnusedLocals": true,
+		"resolveJsonModule": true,
+		"esModuleInterop": true,
+		"types": [
+			"@types/node"
+    ]
+  },
+  "engines": {
+    "node": ">=8.9.1",
+    "npm": ">=3.10.8"
+  },
+	"include": [
+		"*"
+	],
+	"exclude": [
+		"node_modules"
+	]
+}
