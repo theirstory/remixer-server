@@ -1,16 +1,19 @@
 import { promise as glob } from "glob-promise";
-import { basename } from "path";
+import { basename, join } from "path";
 import ffprobe from "ffprobe";
 import ffprobeStatic from "ffprobe-static";
+import { getVideoPath } from "./utils";
+const dotenv = require("dotenv");
+dotenv.config();
 
 export const list = async () => {
-  const videosPattern = "./public/videos/*.mp4";
+  const videosPattern: string = join(process.env.VIDEO_PATH, "*.mp4");
 
-  const videos = await glob(videosPattern, {
+  const videos: string[] = await glob(videosPattern, {
     ignore: []
   });
 
-  const response = [];
+  const response: string[] = [];
 
   await Promise.all(videos.map(async (video) => {
     response.push(basename(video));
@@ -20,11 +23,11 @@ export const list = async () => {
 }
 
 export const duration = async (video: string) => {
-  video = "./public/videos/" + video;
+  video = getVideoPath(video);
   const info: any = await ffprobe(video, { path: ffprobeStatic.path });
   if (info && info.streams && info.streams.length) {
-      const duration: number = Number(info.streams[0].duration);
-      return duration;
+    const duration: number = Number(info.streams[0].duration);
+    return duration;
   }
   return 0;
 }

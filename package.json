@@ -11,6 +11,7 @@
     "express": "^4.17.1",
     "express-session": "^1.16.2",
     "ffmpeg-remix": "^0.1.0",
+    "ffmpeg-static": "^2.4.0",
     "ffprobe": "^1.1.0",
     "ffprobe-static": "^3.0.0",
     "glob": "^7.1.4",
