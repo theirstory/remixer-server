@@ -4,10 +4,8 @@ const cors = require("cors");
 const bodyParser = require('body-parser');
 const app = express();
 const http = require("http");
-import remix from 'ffmpeg-remix';
-import { list, duration } from "./videos";
-import { Clip } from './Clip';
-import { getVideoPath } from './utils';
+import { list, duration, remixVideos } from "./videos";
+import { basename } from "path";
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -35,25 +33,13 @@ app.get("/duration/:video", async (req, res) => {
   res.end(JSON.stringify(d));
 });
 
-app.post("/merge", async (req, res) => {
+app.post("/remix", async (req, res) => {
   res.setHeader("Content-Type", "application/json");
-
-  const clips: Clip[] = req.body.map(clip => {
-    return {
-      source: getVideoPath(clip.source),
-      start: clip.start,
-      end: clip.end
-    }
-  });
-
-  remix({
-    output: getVideoPath("merged.mp4"),
-    input: clips,
-    limit: 5, // max ffmpeg parallel processes, default null (unlimited)
-    ffmpegPath: require('ffmpeg-static').path // optionally set path to ffmpeg binary
-  }, function(err, result) {
-    return res.send(JSON.stringify(req.body));
-  });
+  const remixedVideoPath: string = await remixVideos(req.body);
+  const remixedVideo: string = basename(remixedVideoPath);
+  return res.send(JSON.stringify({
+    remixedVideo: remixedVideo
+  }));
 });
 
 // app.post("/add", async (req, res) => {
