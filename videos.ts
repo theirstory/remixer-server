@@ -9,7 +9,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 export const list = async () => {
-  const videosPattern: string = join(process.env.VIDEO_PATH, "*.mp4");
+  const videosPattern: string = join(process.env.VIDEOS_PATH, "*.mp4");
 
   const videos: string[] = await glob(videosPattern, {
     ignore: []
