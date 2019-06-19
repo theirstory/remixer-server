@@ -4,7 +4,7 @@ const cors = require("cors");
 const bodyParser = require('body-parser');
 const app = express();
 const http = require("http");
-import { list, duration, remixVideos } from "./videos";
+import { list, info, remixVideos } from "./videos";
 import { basename } from "path";
 const dotenv = require("dotenv");
 dotenv.config();
@@ -27,10 +27,10 @@ app.get("/list", async (req, res) => {
   res.end(JSON.stringify(videos));
 });
 
-app.get("/duration/:video", async (req, res) => {
+app.get("/info/:video", async (req, res) => {
   res.setHeader("Content-Type", "application/json");
-  const d: number = await duration(req.params.video);
-  res.end(JSON.stringify(d));
+  const i: any = await info(req.params.video);
+  res.end(JSON.stringify(i));
 });
 
 app.post("/remix", async (req, res) => {
@@ -41,16 +41,6 @@ app.post("/remix", async (req, res) => {
     remixedVideo: remixedVideo
   }));
 });
-
-// app.post("/add", async (req, res) => {
-//   res.setHeader("Content-Type", "application/json");
-//   return res.send(JSON.stringify(req.body));
-// });
-
-// app.post("/remove", async (req, res) => {
-//   res.setHeader("Content-Type", "application/json");
-//   return res.send(JSON.stringify(req.body));
-// });
 
 // Start the express application
 http.createServer(app).listen(port, () => {

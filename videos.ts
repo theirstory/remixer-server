@@ -24,14 +24,13 @@ export const list = async () => {
   return response;
 }
 
-export const duration = async (video: string) => {
+export const info = async (video: string) => {
   video = getVideoPath(video);
   const info: any = await ffprobe(video, { path: ffprobeStatic.path });
   if (info && info.streams && info.streams.length) {
-    const duration: number = Number(info.streams[0].duration);
-    return duration;
+    return info.streams[0];
   }
-  return 0;
+  return {};
 }
 
 export const remixVideos = async (body) => {
