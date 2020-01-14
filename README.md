@@ -14,4 +14,4 @@ You need to create `public/videos` and `public/remixes` folders too, placing you
 
 Then run:
 
-  node index.js
+  npm start

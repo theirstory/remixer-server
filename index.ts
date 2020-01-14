@@ -6,6 +6,7 @@ const app = express();
 const http = require("http");
 import { list, info, remixVideos } from "./videos";
 import { basename } from "path";
+import { emptyRemixFolder } from "./utils";
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -35,8 +36,14 @@ app.get("/info/:video", async (req, res) => {
 
 app.post("/remix", async (req, res) => {
   res.setHeader("Content-Type", "application/json");
+
+  if (!process.env.PRODUCTION) {
+    await emptyRemixFolder();
+  }
+
   const remixedVideoPath: string = await remixVideos(req.body);
   const remixedVideo: string = basename(remixedVideoPath);
+
   return res.send(JSON.stringify({
     remixedVideo: remixedVideo
   }));
