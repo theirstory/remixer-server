@@ -28,6 +28,7 @@
     "typescript": "^3.5.1"
   },
   "scripts": {
+    "build": "tsc",
     "start": "node --inspect index.js"
   },
   "repository": {
