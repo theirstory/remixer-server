@@ -4,7 +4,7 @@ const cors = require("cors");
 const bodyParser = require('body-parser');
 const app = express();
 const http = require("http");
-import { list, info, remixVideos } from "./videos";
+import { list, info, remixMedia } from "./media";
 import { basename } from "path";
 import { emptyRemixFolder } from "./utils";
 const dotenv = require("dotenv");
@@ -24,13 +24,13 @@ app.get("/", (req, res) => {
 
 app.get("/list", async (req, res) => {
   res.setHeader("Content-Type", "application/json");
-  const videos = await list();
-  res.end(JSON.stringify(videos));
+  const media = await list();
+  res.end(JSON.stringify(media));
 });
 
-app.get("/info/:video", async (req, res) => {
+app.get("/info/:media", async (req, res) => {
   res.setHeader("Content-Type", "application/json");
-  const i: any = await info(req.params.video);
+  const i: any = await info(req.params.media);
   res.end(JSON.stringify(i));
 });
 
@@ -41,11 +41,11 @@ app.post("/remix", async (req, res) => {
     await emptyRemixFolder();
   }
 
-  const remixedVideoPath: string = await remixVideos(req.body);
-  const remixedVideo: string = basename(remixedVideoPath);
+  const remixedMediaPath: string = await remixMedia(req.body);
+  const remixedMedia: string = basename(remixedMediaPath);
 
   return res.send(JSON.stringify({
-    remixedVideo: remixedVideo
+    remixedMedia: remixedMedia
   }));
 });
 

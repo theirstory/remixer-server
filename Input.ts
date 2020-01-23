@@ -1,4 +1,4 @@
-export interface Clip {
+export interface Input {
   source: string;
   start: number;
   end: number;

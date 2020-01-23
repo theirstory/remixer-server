@@ -25,10 +25,10 @@ export const emptyRemixFolder = () => {
   });
 }
 
-export const getVideoPath = (video: string) => {
-  return join(process.env.VIDEOS_PATH, video);
+export const getMediaPath = (media: string) => {
+  return join(process.env.MEDIA_PATH, media);
 }
 
-export const getRemixedVideoPath = () => {
+export const getRemixedMediaPath = () => {
   return join(process.env.REMIXES_PATH, uuidv1() + ".mp4");
 }
