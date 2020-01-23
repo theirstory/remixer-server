@@ -12,6 +12,10 @@ REMIXES_PATH="./public/remixes/"
 
 You need to create `public/media` and `public/remixes` folders too, placing your source material media in `public/media`. Remixed media will be saved into `public/remixes` named with a uuid.
 
+Build:
+
+  npm run build
+
 Then run:
 
   npm start
