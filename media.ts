@@ -39,7 +39,7 @@ export const remixMedia = async (body) => {
 
     const input: Input[] = body.map(annotation => {
       return {
-        source: getMediaPath(annotation[1].target),
+        source: getMediaPath(annotation[1].body),
         start: annotation[1].start,
         end: annotation[1].end
       }
