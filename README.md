@@ -14,8 +14,12 @@ You need to create `public/media` and `public/remixes` folders too, placing your
 
 Build:
 
-  npm run build
+    npm run build
 
 Then run:
 
-  npm start
+    npm start
+
+## License
+
+- [MIT](LICENSE)
